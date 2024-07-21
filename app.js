@@ -5,6 +5,7 @@ const app= express();
 const port = process.env.PORT || 8000;
 
 require("dotenv").config();
+require("./server/models/database.js");
 
 app.use(express.urlencoded({extended: true}));
 app.use(express.static('public'));
