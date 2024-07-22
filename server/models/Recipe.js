@@ -33,6 +33,10 @@ const recipeSchema = new mongoose.Schema({
     },
 });
 
+recipeSchema.index({ name: "text", category : "text" });
+// wildcard indexing
+// recipeSchema.index({  });
+
 const Recipe =  mongoose.model("Recipe", recipeSchema);
 
 module.exports= Recipe;

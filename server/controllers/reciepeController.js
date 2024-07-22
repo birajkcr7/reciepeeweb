@@ -68,6 +68,92 @@ exports.exploreRecipe = async(req,res) =>{
   }
 }
 
+// post/searchhh
+
+exports.searchRecipe = async(req,res) =>{
+    try {
+        let searchTerm = req.body.searchTerm;
+
+        let recipe = await Recipe.find({ $text : { $search: searchTerm, $diacriticSensitive: true  } })
+        res.render("search", {title:"search", recipe});
+       
+    } catch (error) {
+        res.status(500).send({message: error.message|| "error"});
+    }
+}
+
+
+
+// EXPLORE LATEST
+
+exports.exploreLatest = async(req,res) =>{
+    try {
+
+        let limitNumber = 20;
+
+        let recipe = await Recipe.find({}).sort({_id: -1}).limit(limitNumber);
+        res.render("explore-latest", {title:"explore-Latest", recipe});
+       
+    } catch (error) {
+        res.status(500).send({message: error.message|| "error"});
+    }
+}
+
+
+// EXPLORE Random
+
+exports.exploreRandom = async(req,res) =>{
+    try {
+
+        let limitNumber = 20;
+
+        let recipe = await Recipe.find({}).limit(limitNumber);
+        res.render("explore-random", {title:"explore-random", recipe});
+       
+    } catch (error) {
+        res.status(500).send({message: error.message|| "error"});
+    }
+}
+
+// SUBMIT RECIPEEEEE
+
+exports.submitRecipe = async(req,res) =>{
+    try {
+        res.render("submit-recipe", {
+            title: "submit-recipe"
+        })
+    } catch (error) {
+        res.status(500).send({message: error.message|| "error"});
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
         
