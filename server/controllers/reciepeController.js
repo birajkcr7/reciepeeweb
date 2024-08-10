@@ -119,11 +119,40 @@ exports.exploreRandom = async(req,res) =>{
 
 exports.submitRecipe = async(req,res) =>{
     try {
+
+        const infoErrorsObj = req.flash('infoErrors');
+        const infoSubmitObj = req.flash('infoSubmit');
+
         res.render("submit-recipe", {
-            title: "submit-recipe"
+            title: "submit-recipe",
+            infoErrorsObj, infoSubmitObj
         })
     } catch (error) {
         res.status(500).send({message: error.message|| "error"});
+    }
+}
+
+// post submit
+exports.submitRecipeOnPost = async(req,res) =>{
+    try {
+
+        const newRecipe = new Recipe({
+            name: req.body.name,
+            description: req.body.description,
+            email: req.body.email ,
+            ingredients: req.body.ingredients,
+            category: req.body.category,
+            image:"DalBhat.jpg",
+        });
+
+        await newRecipe.save();
+
+        req.flash("infoSubmit", 'Recipee has been added.')
+        res.redirect("/submit-recipe")
+    } catch (error) {
+        res.json(error)
+        req.flash("infoErrors", 'error.');
+        res.redirect("/submit-recipe")
     }
 }
 
@@ -155,10 +184,9 @@ exports.submitRecipe = async(req,res) =>{
 
 
 
-
         
 // async function insertDymmyCategoryData(){
-//     try {
+//     try {     
 //         await category.insertMany([
 //             {
 //                 "name": "Thai",

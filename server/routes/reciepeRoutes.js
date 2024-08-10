@@ -13,5 +13,6 @@ router.post("/search", reciepeController.searchRecipe);
 router.get("/explore-latest", reciepeController.exploreLatest);
 router.get("/explore-random", reciepeController.exploreRandom);
 router.get("/submit-recipe", reciepeController.submitRecipe);
+router.post("/submit-recipe", reciepeController.submitRecipeOnPost);
 
 module.exports= router;

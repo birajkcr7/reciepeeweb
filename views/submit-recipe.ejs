@@ -7,6 +7,12 @@
 
   <div class="row justify-content-center">
 
+    <% if(infoSubmitObj != "") { %>
+      <div class="alert alert-success" role="alert">
+        <%= infoSubmitObj %>
+      </div>
+      <%   } %>
+
     <div class="col-8">
 
         <form action="/submit-recipe" enctype="multipart/form-data" method="POST">
@@ -20,7 +26,7 @@
     
             <div class="col-12">
               <label for="name" class="form-label">Recipe Name</label>
-              <input type="text" name="name" id="name" class="form-control" required>
+              <input type="text" name="name" id="name" class="form-control">
             </div>
             
             <div class="col-12">
